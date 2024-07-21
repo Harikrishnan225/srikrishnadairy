@@ -1,1 +1,45 @@
-<p>sales works!</p>
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-12 col-md-4">
+      <!-- search and new sales btn -->
+      <div class="d-flex justify-content-between mt-3">
+        <h5>Search Sales Data</h5>
+        <button type="button" class="btn btn-primary ms-5">
+          <i class="bi bi-plus-circle-fill"></i>
+        </button>
+      </div>
+
+      <!-- select customer dropdown -->
+      <div>
+        <label for="selectCust" class="mb-2">Select Customer</label>
+        <select class="form-select mb-2" id="selectCust" aria-label="Default select example">
+          <option selected>Select Customer</option>
+          <option value="1">One</option>
+        </select>
+      </div>
+
+      <!-- From and To date -->
+
+      <div class="d-flex">
+        <!-- From Date -->
+        <div class="col-md-6 me-1">
+          <label for="fromDate" class="mb-1">From Date</label>
+          <input id="fromDate" class="form-control mb-1" type="date" />
+        </div>
+
+        <!-- To date -->
+        <div class="col-md-6">
+          <label for="toDate" class="mb-1">To Date</label>
+          <input id="toDate" class="form-control mb-1" type="date" />
+        </div>
+      </div>
+
+      <!-- search button -->
+      <div class="d-flex justify-content-end mt-2">
+        <button type="button" class="btn btn-primary">
+          <i class="bi bi-search me-1"></i>Search
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,51 @@
-<div class="container">
-  <div class="row justify-content-center align-items-center">
+<div class="container backgroundimg">
+  <div class="row justify-content-center align-items-center vh-100">
     <div class="col-12 col-sm-6 col-md-4">
-      <form>
-        
+      <form [formGroup]="loginFormDetails()" (ngSubmit)="userLoginDetails()">
+        <!-- user mobile number -->
+        <div class="form-group">
+          <label for="mobile" class="mb-2">Mobile:</label>
+          <input
+            type="text"
+            class="form-control mb-3"
+            id="mobile"
+            placeholder="Enter mobile number"
+            formControlName="mobile"
+          />
+        </div>
+
+        <!-- password -->
+        <div class="input-group">
+          <label for="password" class="mb-2 font-monospace">Password:</label>
+          <div class="input-group">
+          <input
+            [type]="fieldTextType ? 'text' : 'password'"
+            class="form-control mb-3"
+            id="password"
+            placeholder="Enter password"
+            formControlName="password"
+          />
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">
+              <!-- <i class="bi bi-eye"></i> -->
+              <i
+                class="bi"
+                ngClass="{'bi-eye-slash': !fieldTextType, 'bi-eye': fieldTextType}"
+                (click)="toggleFieldType()"
+              ></i>
+            </span>
+          </div>
+          </div>
+        </div>
+
+        <!-- form submit  -->
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="loginFormDetails().invalid"
+        >
+          Login
+        </button>
       </form>
     </div>
   </div>
