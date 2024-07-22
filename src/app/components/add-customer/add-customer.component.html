@@ -3,11 +3,11 @@
     <div class="d-flex justify-content-center align-content-center">
       <div class="col-12 col-md-3 mt-2">
         <h3>Add Customer</h3>
-        <form>
+        <form [formGroup]="addNewCustomer()" (ngSubmit)="addNewCustomerSubmit()">
           <!-- customer name -->
           <div class="mb-3">
             <label for="customerName" class="form-label">Customer Name</label>
-            <input type="text" class="form-control" id="customerName" />
+            <input type="text" class="form-control" id="customerName" formControlName="customerName" />
           </div>
 
           <!-- customer mobile -->
@@ -15,60 +15,60 @@
             <label for="customerMobile" class="form-label"
               >Customer Mobile</label
             >
-            <input type="text" class="form-control" id="customerMobile" />
+            <input type="text" class="form-control" id="customerMobile" formControlName="customerMobile"/>
           </div>
 
           <!-- customer email -->
           <div class="mb-3">
             <label for="customerEmail" class="form-label">Customer Email</label>
-            <input type="text" class="form-control" id="customerEmail" />
+            <input type="text" class="form-control" id="customerEmail" formControlName="customerEmail"/>
           </div>
 
           <!-- milk and curd price -->
-          <div class="col-12 col-md-12 d-flex justify-content-center">
+          <div class="col-12 col-md-12 d-md-flex justify-content-center">
             <div class="mb-3 col-12 col-md-6 me-2">
-              <label for="customerName" class="form-label"
+              <label for="milkPerLiter" class="form-label"
                 >Milk Price (1Liter)</label
               >
-              <input type="number" class="form-control" id="customerName" />
+              <input type="number" class="form-control" id="milkPerLiter" placeholder="0" formControlName="milkPerLiter"/>
             </div>
 
             <div class="mb-3 col-12 col-md-6">
-              <label for="customerName" class="form-label"
+              <label for="curdPerLiter" class="form-label"
                 >Curd Price (1Liter)</label
               >
-              <input type="number" class="form-control" id="customerName" />
+              <input type="number" class="form-control" id="curdPerLiter" placeholder="0" formControlName="curdPerLiter"/>
             </div>
           </div>
 
           <!-- Door no and place -->
-          <div class="col-12 col-md-12 d-flex justify-content-center">
+          <div class="col-12 col-md-12 d-md-flex justify-content-center">
             <div class="mb-3 col-12 col-md-4 me-2">
               <label for="doorNo" class="form-label">Door No</label>
-              <input type="text" class="form-control" id="doorNo" />
+              <input type="text" class="form-control" id="doorNo" formControlName="customerDoorNo"/>
             </div>
 
             <div class="mb-3 col-12 col-md-8">
               <label for="place" class="form-label">Place</label>
-              <input type="text" class="form-control" id="place" />
+              <input type="text" class="form-control" id="place" formControlName="customerPlace"/>
             </div>
           </div>
 
           <!-- distric and pincode -->
-          <div class="col-12 col-md-12 d-flex justify-content-center">
+          <div class="col-12 col-md-12 d-md-flex justify-content-center">
             <div class="mb-3 col-12 col-md-8 me-2">
               <label for="distric" class="form-label">Distric</label>
-              <input type="text" class="form-control" id="distric" />
+              <input type="text" class="form-control" id="distric" formControlName="customerDistrict"/>
             </div>
 
             <div class="mb-3 col-12 col-md-4">
               <label for="pincode" class="form-label">Pincode</label>
-              <input type="text" class="form-control" id="pincode" />
+              <input type="text" class="form-control" id="pincode" formControlName="customerPincode"/>
             </div>
           </div>
 
           <!-- form submit button -->
-          <button class="btn btn-primary">Submit</button>
+          <button class="btn btn-primary" [disabled]="addNewCustomer().invalid">Submit</button>
         </form>
       </div>
     </div>
