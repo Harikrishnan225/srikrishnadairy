@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { AddNewCustomer } from './add-customer';
+import { AddCustomer } from './add-customer';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,8 @@ export class AddCustomerService {
   }
 
   // createnewcustomer
-  createCustomerDetails(formData: AddNewCustomer) {
-    this.#http.post<AddNewCustomer>('', formData)
+  createCustomerDetails(formData: AddCustomer) {
+    this.#http.post<AddCustomer>('', formData)
   }
 
   // updatecustomer

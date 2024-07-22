@@ -1,4 +1,4 @@
-export interface AddNewCustomer {
+export interface AddCustomer {
     customerName: string | null;
     customerMobile: number | null;
     customerEmail: string | null;

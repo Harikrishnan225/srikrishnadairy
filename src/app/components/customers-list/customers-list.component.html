@@ -19,14 +19,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          @for (cust of customerData(); track cust) {
+            <tr>
+              <td>1</td>
+              <td>{{cust.customerName}}</td>
+              <td>{{cust.customerMobile}}</td>
+              <td>{{cust.milkPerLiter}}</td>
+              <td>{{cust.curdPerLiter}}</td>
+              <td>
+                <i class="bi bi-pencil me-3"></i>
+                <i class="bi bi-trash3"></i>
+              </td>
+            </tr>
+          }          
         </tbody>
       </table>
     </div>

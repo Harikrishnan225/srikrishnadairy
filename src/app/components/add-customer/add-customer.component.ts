@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AddNewCustomer } from '../../services/add-customer/add-customer';
+import { AddCustomer } from '../../services/add-customer/add-customer';
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage/storage.service';
 
@@ -22,8 +22,8 @@ export class AddCustomerComponent {
   //form data
   addNewCustomer = signal(this.#fb.group({
     customerName: ['', Validators.required],
-    customerMobile: ['', Validators.required, Validators.maxLength(10)],
-    customerEmail: ['', Validators.required, Validators.email],
+    customerMobile: ['', Validators.required],
+    customerEmail: ['', Validators.required],
     milkPerLiter: [''],
     curdPerLiter: [''],
     customerDoorNo: [''],
@@ -34,9 +34,9 @@ export class AddCustomerComponent {
 
   //formsubmit
   addNewCustomerSubmit() {
-    const formValue = this.addNewCustomer().value as AddNewCustomer;
+    const formValue = this.addNewCustomer().value as AddCustomer;
     if (formValue) {
-      this.#storageService.saveData('customerData', JSON.stringify(formValue));
+      this.#storageService.saveData('customerData', formValue);
       this.#router.navigate(['/customers']);
       this.addNewCustomer().reset();
     }
