@@ -22,7 +22,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   getCustomerDetails() {
-    const dataCust = this.#storageService.getCustomerData('customerData');
+    const dataCust = this.#storageService.getData('customerData');
     console.log(dataCust)
     this.customerData.set(dataCust);
   }

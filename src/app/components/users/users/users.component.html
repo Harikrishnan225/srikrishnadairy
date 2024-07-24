@@ -4,62 +4,48 @@
       <div class="col-12 col-md-3 mt-2">
         <h3>New User</h3>
         <form [formGroup]="addUser()" (ngSubmit)="userSubmit()">
-          <!-- customer name -->
+          <!-- user name -->
           <div class="mb-3">
-            <label for="customerName" class="form-label">Customer Name</label>
+            <label for="userName" class="form-label">User Name</label>
             <input
               type="text"
               class="form-control"
-              id="customerName"
-              formControlName="customerName"
+              id="userName"
+              formControlName="userName"
             />
           </div>
 
-          <!-- customer mobile -->
+          <!-- user mobile -->
           <div class="mb-3">
-            <label for="customerMobile" class="form-label"
-              >Customer Mobile</label
-            >
+            <label for="userMobile" class="form-label">User Mobile</label>
             <input
               type="text"
               class="form-control"
-              id="customerMobile"
-              formControlName="customerMobile"
+              id="userMobile"
+              formControlName="userMobile"
+            />
+          </div>
+          <!-- password -->
+          <div class="mb-3">
+            <label for="password" class="form-label">User Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="userPassword"
             />
           </div>
 
-          <!-- customer email -->
+          <!-- user email -->
+
           <div class="mb-3">
-            <label for="customerEmail" class="form-label">Customer Email</label>
+            <label for="userEmail" class="form-label">User Email</label>
             <input
               type="text"
               class="form-control"
-              id="customerEmail"
-              formControlName="customerEmail"
+              id="userEmail"
+              formControlName="userEmail"
             />
-          </div>
-
-          <!-- distric and pincode -->
-          <div class="col-12 col-md-12 d-md-flex justify-content-center">
-            <div class="mb-3 col-12 col-md-8 me-2">
-              <label for="distric" class="form-label">Distric</label>
-              <input
-                type="text"
-                class="form-control"
-                id="distric"
-                formControlName="customerDistrict"
-              />
-            </div>
-
-            <div class="mb-3 col-12 col-md-4">
-              <label for="pincode" class="form-label">Pincode</label>
-              <input
-                type="text"
-                class="form-control"
-                id="pincode"
-                formControlName="customerPincode"
-              />
-            </div>
           </div>
 
           <!-- form submit button -->

@@ -23,11 +23,11 @@ export const routes: Routes = [
         loadComponent: () => import('./components/customer/edit-customer/edit-customer.component').then(c => c.EditCustomerComponent)
     },
     {
-        path: 'users',
+        path: 'user/new',
         loadComponent: () => import('./components/users/users/users.component').then(C => C.UsersComponent)
     },
     {
-        path: 'user/new',
+        path: 'user',
         loadComponent: () => import('./components/users/user-list/user-list.component').then(c => c.UserListComponent)
     },
     {

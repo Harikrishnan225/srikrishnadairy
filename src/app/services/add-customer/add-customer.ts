@@ -1,4 +1,5 @@
 export interface AddCustomer {
+    custId: number;
     customerName: string | null;
     customerMobile: number | null;
     customerEmail: string | null;

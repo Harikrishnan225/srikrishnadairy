@@ -1,1 +1,59 @@
-<p>edit-user works!</p>
+<div class="container">
+  <div class="row">
+    <div class="d-flex justify-content-center align-content-center">
+      <div class="col-12 col-md-3 mt-2">
+        <h3>New User</h3>
+        <form [formGroup]="editUser()" (ngSubmit)="editUserSubmit()">
+          <!-- user name -->
+          <div class="mb-3">
+            <label for="userName" class="form-label">User Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="userName"
+              formControlName="userName"
+            />
+          </div>
+
+          <!-- user mobile -->
+          <div class="mb-3">
+            <label for="userMobile" class="form-label">User Mobile</label>
+            <input
+              type="text"
+              class="form-control"
+              id="userMobile"
+              formControlName="userMobile"
+            />
+          </div>
+          <!-- password -->
+          <div class="mb-3">
+            <label for="password" class="form-label">User Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="userPassword"
+            />
+          </div>
+
+          <!-- user email -->
+
+          <div class="mb-3">
+            <label for="userEmail" class="form-label">User Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="userEmail"
+              formControlName="userEmail"
+            />
+          </div>
+
+          <!-- form submit button -->
+          <button class="btn btn-primary" [disabled]="editUser().invalid">
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

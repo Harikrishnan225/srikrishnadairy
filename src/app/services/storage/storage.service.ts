@@ -7,19 +7,19 @@ export class StorageService {
 
   constructor() { }
   //create
-  saveCustomerData(customerData: string, value: any) {
-    const data = this.getCustomerData(customerData);
+  saveData(Data: string, value: any) {
+    const data = this.getData(Data);
     if (data) {
       data.push(value);
-      localStorage.setItem(customerData, JSON.stringify(data));
+      localStorage.setItem(Data, JSON.stringify(data));
     } else {
-      localStorage.setItem(customerData, JSON.stringify([value]));
+      localStorage.setItem(Data, JSON.stringify([value]));
     }
 
   }
 
   //get
-  getCustomerData(key: string) {
+  getData(key: string) {
     const custData = localStorage.getItem(key) || '';
     try {
       if (custData) {
@@ -33,7 +33,7 @@ export class StorageService {
   }
 
   //delete
-  removeCustomerData(key: string) {
+  removeData(key: string) {
     localStorage.removeItem(key);
   }
 

@@ -66,7 +66,7 @@ export class NewSalesComponent implements OnInit {
   }
 
   customerDetails() {
-    const valueCust = this.#storageService.getCustomerData('customerData');
+    const valueCust = this.#storageService.getData('customerData');
     console.log(valueCust)
     this.selectCustomer.set(valueCust);
   }

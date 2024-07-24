@@ -36,7 +36,7 @@ export class AddCustomerComponent {
   addNewCustomerSubmit() {
     const formValue = this.addNewCustomer().value as AddCustomer;
     if (formValue) {
-      this.#storageService.saveCustomerData('customerData', formValue);
+      this.#storageService.saveData('customerData', formValue);
       this.#router.navigate(['/customers']);
       this.addNewCustomer().reset();
     }

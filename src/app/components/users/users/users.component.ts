@@ -1,5 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { StorageService } from '../../../services/storage/storage.service';
+import { Router } from '@angular/router';
+import { userData } from '../../../services/users/users';
 
 @Component({
   selector: 'app-users',
@@ -11,13 +14,20 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './users.component.scss'
 })
 export class UsersComponent {
-#fb = inject(FormBuilder);
+  #fb = inject(FormBuilder);
+  #storageService = inject(StorageService);
+  #router = inject(Router);
 
   addUser = signal(this.#fb.group({
+    userName: [''],
+    userMobile: [''],
+    userPassword: [''],
+    userEmail: ['']
+  }));
 
-  }))
-
-  userSubmit(){
-    
+  userSubmit() {
+    const userValue = this.addUser().value as userData
+    this.#storageService.saveData('userData', userValue);
+    this.#router.navigate(['/user']);
   }
 }
