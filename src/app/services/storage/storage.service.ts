@@ -7,8 +7,8 @@ export class StorageService {
 
   constructor() { }
   //create
-  saveData(customerData: string, value: any) {
-    const data = this.getData(customerData);
+  saveCustomerData(customerData: string, value: any) {
+    const data = this.getCustomerData(customerData);
     if (data) {
       data.push(value);
       localStorage.setItem(customerData, JSON.stringify(data));
@@ -19,7 +19,7 @@ export class StorageService {
   }
 
   //get
-  getData(key: string) {
+  getCustomerData(key: string) {
     const custData = localStorage.getItem(key) || '';
     try {
       if (custData) {
@@ -33,7 +33,7 @@ export class StorageService {
   }
 
   //delete
-  removeData(key: string) {
+  removeCustomerData(key: string) {
     localStorage.removeItem(key);
   }
 

@@ -8,22 +8,34 @@ export const routes: Routes = [
     },
     {
         path: 'sales',
-        loadComponent: () => import('./components/sales/sales.component').then(c => c.SalesComponent)
+        loadComponent: () => import('./components/sales/sales/sales.component').then(c => c.SalesComponent)
     },
     {
         path: 'sales/new',
-        loadComponent: () => import('./components/new-sales/new-sales.component').then(c => c.NewSalesComponent)
+        loadComponent: () => import('./components/sales/new-sales/new-sales.component').then(c => c.NewSalesComponent)
     },
     {
         path: 'customers/new',
-        loadComponent: () => import('./components/add-customer/add-customer.component').then(c => c.AddCustomerComponent)
+        loadComponent: () => import('./components/customer/add-customer/add-customer.component').then(c => c.AddCustomerComponent)
+    },
+    {
+        path: 'customers/edit',
+        loadComponent: () => import('./components/customer/edit-customer/edit-customer.component').then(c => c.EditCustomerComponent)
     },
     {
         path: 'users',
-        loadComponent: () => import('./components/users/users.component').then(C => C.UsersComponent)
+        loadComponent: () => import('./components/users/users/users.component').then(C => C.UsersComponent)
+    },
+    {
+        path: 'user/new',
+        loadComponent: () => import('./components/users/user-list/user-list.component').then(c => c.UserListComponent)
+    },
+    {
+        path: 'user/edit',
+        loadComponent: () => import('./components/users/edit-user/edit-user.component').then(c => c.EditUserComponent)
     },
     {
         path: 'customers',
-        loadComponent: () => import('./components/customers-list/customers-list.component').then(c => c.CustomersListComponent)
+        loadComponent: () => import('./components/customer/customers-list/customers-list.component').then(c => c.CustomersListComponent)
     }
 ];

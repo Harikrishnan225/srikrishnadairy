@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center mt-3">
+    <div class="col-12 col-md-4">
+      <div class="d-flex justify-content-between mb-3">
+        <div>
+          <h3>New Sales Entry</h3>
+        </div>
+        <!-- search customer -->
+        <div>
+          <i
+            class="bi bi-search"
+            style="font-size: 1.5rem; width: 1rem; color: blue"
+          ></i>
+        </div>
+      </div>
+      <form [formGroup]="newSalesForm()" (ngSubmit)="newSalesFormSubmit()">
+        <!-- select customer -->
+        <div class="col-12 col-md-12 mb-3">
+          <label for="selectCust" class="mb-2">Select Customer</label>
+          <select class="form-select" id="selectCust" formControlName="selectedCustomer">
+            <option disabled>Select Customer</option>
+            @for (cust of selectCustomer(); track cust) {
+            <option [value]="cust.customerName">{{ cust.customerName }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- sales date and invoice number -->
+
+        <div class="d-flex mb-3">
+          <!-- sales date  -->
+          <div class="col-12 col-md-6 me-1">
+            <label for="salesDate" class="mb-2">Select Sales Date</label>
+            <input id="salesDate" class="form-control" type="date" formControlName="salesDate" />
+          </div>
+          <!-- invoice number -->
+          <div class="col-12 col-md-6">
+            <label for="invoiceNumber" class="mb-2">Invoice Number</label>
+            <input
+              id="invoiceNumber"
+              class="form-control mb-2"
+              type="number"
+              placeholder="EG.12345"
+              formControlName="invoiceNumber"
+            />
+          </div>
+        </div>
+
+        <!-- milk liters -->
+        <div class="row">
+          <h4>Milk</h4>
+        </div>
+        <div class="d-flex mb-2">
+          <!--  no of liters milk  -->
+          <div class="col-12 col-md-6 me-1">
+            <label for="noOfLiters" class="mb-2">No of liters </label>
+            <input id="noOfLiters" class="form-control mb-2" type="number" formControlName="noOfLitersMilk" />
+          </div>
+          <!-- per Liter -->
+          <div class="col-12 col-md-6">
+            <label for="oneLiter" class="mb-2">1 Liter Price</label>
+            <input id="oneLiter" class="form-control mb-2" type="number" formControlName="milkPricePerLiter"/>
+          </div>
+        </div>
+
+        <!-- curd liters -->
+        <div class="row">
+          <h4>Curd</h4>
+        </div>
+        <div class="d-flex mb-2">
+          <!-- sales date  -->
+          <div class="col-12 col-md-6 me-1">
+            <label for="curdLiters" class="mb-2">No of liters</label>
+            <input id="curdLiters" class="form-control mb-2" type="number" formControlName="noOfLitersCurd" />
+          </div>
+          <!-- invoice number -->
+          <div class="col-12 col-md-6">
+            <label for="curdPerLiter" class="mb-2">1 Liter Price</label>
+            <input id="curdPerLiter" class="form-control mb-2" type="number" formControlName="curdPricePerLiter" />
+          </div>
+        </div>
+
+        <!-- total price and submit -->
+        <div class="d-flex justify-content-between mt-lg-5">
+          <div>
+            <h4>Total ₹</h4>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary" [disabled]="newSalesForm().invalid">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

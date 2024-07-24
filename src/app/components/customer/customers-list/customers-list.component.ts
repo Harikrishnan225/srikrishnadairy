@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { StorageService } from '../../services/storage/storage.service';
-import { AddCustomer } from '../../services/add-customer/add-customer';
+import { AddCustomer } from '../../../services/add-customer/add-customer';
+import { StorageService } from '../../../services/storage/storage.service';
 
 @Component({
   selector: 'app-customers-list',
@@ -22,7 +22,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   getCustomerDetails() {
-    const dataCust = this.#storageService.getData('customerData');
+    const dataCust = this.#storageService.getCustomerData('customerData');
     console.log(dataCust)
     this.customerData.set(dataCust);
   }
