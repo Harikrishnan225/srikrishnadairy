@@ -20,11 +20,6 @@ export class EditUserComponent implements OnInit {
   #router = inject(Router);
   userId: string | undefined;
 
-  ngOnInit(): void {
-    this.userId = this.#route.snapshot.params['id'];
-    this.getUserData();
-  }
-
   editUser = signal(this.#fb.group({
     userId: [''],
     userName: [''],
@@ -33,8 +28,13 @@ export class EditUserComponent implements OnInit {
     userEmail: ['']
   }));
 
+  ngOnInit(): void {
+    this.userId = this.#route.snapshot.params['id'];
+    this.getUserData();
+  }
+
   getUserData() {
-    const data = this.#userService.getOneCust('userdata', this.userId);
+    const data = this.#userService.getOneCust('userData', this.userId);
     this.editUser().patchValue(data);
   }
 

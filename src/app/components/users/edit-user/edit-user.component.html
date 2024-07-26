@@ -3,7 +3,18 @@
     <div class="d-flex justify-content-center align-content-center">
       <div class="col-12 col-md-3 mt-2">
         <h3>New User</h3>
+        <!-- user id -->
         <form [formGroup]="editUser()" (ngSubmit)="editUserSubmit()">
+          <div class="mb-3">
+            <label for="userId" class="form-label">User Id</label>
+            <input
+              type="text"
+              class="form-control"
+              id="userId"
+              formControlName="userId"
+            />
+          </div>
+
           <!-- user name -->
           <div class="mb-3">
             <label for="userName" class="form-label">User Name</label>

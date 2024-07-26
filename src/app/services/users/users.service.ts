@@ -19,10 +19,10 @@ export class UsersService {
 
 //get
 getData(key: string) {
-  const custData = localStorage.getItem(key) || '';
+  const userData = localStorage.getItem(key) || '';
   try {
-    if (custData) {
-      const data = JSON.parse(custData);
+    if (userData) {
+      const data = JSON.parse(userData);
       return data || [];
     }
   } catch (error) {
@@ -34,8 +34,8 @@ getData(key: string) {
 //getonecust
 getOneCust(key: string, getOneId: any) {
   const data = this.getData(key);
-  const custData = data.find((item: any) => item.userIdId === getOneId);
-  return custData;
+  const userData = data.find((item: any) => item.userIdId === getOneId);
+  return userData;
 }
 
 //update
