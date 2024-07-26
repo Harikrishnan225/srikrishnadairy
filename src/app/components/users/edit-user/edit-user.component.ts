@@ -29,16 +29,12 @@ export class EditUserComponent implements OnInit {
   }));
 
   ngOnInit(): void {
-    this.userId = this.#route.snapshot.params['id'];
-    console.log(this.userId);
-    
+    this.userId = this.#route.snapshot.params['id'];    
     this.getUserData();
   }
 
   getUserData() {
-    const data = this.#userService.getOneCust('userData', this.userId);
-    console.log(data);
-    
+    const data = this.#userService.getOneCust('userData', this.userId);    
     this.editUser().patchValue(data);
   }
 

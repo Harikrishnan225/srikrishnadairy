@@ -21,8 +21,6 @@ export class UserListComponent implements OnInit {
 
   userDeatails() {
     const value = this.#userService.getData('userData');
-    console.log(value);
-    
     this.userData.set(value);
   }
 }
