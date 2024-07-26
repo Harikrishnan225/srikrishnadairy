@@ -1,5 +1,6 @@
 export interface AddCustomer {
-    custId: number;
+id: any|string;
+    customerId: number;
     customerName: string | null;
     customerMobile: number | null;
     customerEmail: string | null;

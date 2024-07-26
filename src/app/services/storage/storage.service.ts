@@ -32,6 +32,16 @@ export class StorageService {
     }
   }
 
+  //update
+  updateData(key: string, updatedItem: any) {
+    const data = this.getData(key);
+    const index = data.findIndex((item: any) => item.customerId === updatedItem.customerId);
+    if (index !== -1) {
+      data[index] = updatedItem;
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+  }
+
   //delete
   removeData(key: string) {
     localStorage.removeItem(key);
