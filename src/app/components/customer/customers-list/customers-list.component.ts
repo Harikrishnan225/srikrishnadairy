@@ -25,4 +25,10 @@ export class CustomersListComponent implements OnInit {
     const dataCust = this.#storageService.getData('customerData');
     this.customerData.set(dataCust);
   }
+
+  deleteCustomer(custId: number) {
+    console.log('delete',custId);
+    
+    this.#storageService.removeData('customerData', custId)
+  }
 }

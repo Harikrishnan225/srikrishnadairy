@@ -13,56 +13,80 @@
         </button>
       </div>
 
-      <!-- select customer dropdown -->
-      <div>
-        <label for="selectCust" class="mb-2">Select Customer</label>
-        <select class="form-select mb-2" id="selectCust">
-          <option selected>Select Customer</option>
-          @for (cust of selectedCustomer(); track cust) {
-          <option [value]="cust.customerName">{{ cust.customerName }}</option>
-          }
-        </select>
-      </div>
-
-      <!-- From and To date -->
-
-      <div class="d-flex">
-        <!-- From Date -->
-        <div class="col-md-6 me-1">
-          <label for="fromDate" class="mb-1">From Date</label>
-          <input id="fromDate" class="form-control mb-1" type="date" />
+      <form [formGroup]="salesForm()" (ngSubmit)="salesFormSubmit()">
+        <!-- select customer dropdown -->
+        <div>
+          <label for="selectCust" class="mb-2">Select Customer</label>
+          <select
+            class="form-select mb-2"
+            id="selectCust"
+            formControlName="customerName"
+          >
+            <option selected>Select Customer</option>
+            @for (cust of selectedCustomer(); track cust) {
+            <option [value]="cust.customerName">{{ cust.customerName }}</option>
+            }
+          </select>
         </div>
 
-        <!-- To date -->
-        <div class="col-md-6">
-          <label for="toDate" class="mb-1">To Date</label>
-          <input id="toDate" class="form-control mb-1" type="date" />
-        </div>
-      </div>
+        <!-- From and To date -->
 
-      <!-- search button -->
-      <div class="d-flex justify-content-end mt-2">
-        <button type="button" class="btn btn-primary">
-          <i class="bi bi-search me-1"></i>Search
-        </button>
-      </div>
+        <div class="d-flex">
+          <!-- From Date -->
+          <div class="col-md-6 me-1">
+            <label for="fromDate" class="mb-1">From Date</label>
+            <input
+              id="fromDate"
+              class="form-control mb-1"
+              type="date"
+              formControlName="fromDate"
+            />
+          </div>
+
+          <!-- To date -->
+          <div class="col-md-6">
+            <label for="toDate" class="mb-1">To Date</label>
+            <input
+              id="toDate"
+              class="form-control mb-1"
+              type="date"
+              formControlName="toDate"
+            />
+          </div>
+        </div>
+
+        <!-- search button -->
+        <div class="d-flex justify-content-end mt-2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="salesForm().invalid"
+          >
+            <i class="bi bi-search me-1"></i>Search
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
   <!-- search details table -->
-  @if (false) {
+  @if (true) {
   <div class="row justify-content-center align-items-center mt-5">
     <div class="col-12 col-md-10">
       <div class="d-flex">
         <div class="col-4">
-          <div class="fw-bold">From:</div>
-          <div class="fw-bold">To:</div>
+          <div class="fw-bold">From:{{ salesForm().value.fromDate }}</div>
+          <div class="fw-bold">To:{{ salesForm().value.toDate }}</div>
         </div>
         <div class="col-3">
-          <h5 class="fw-bold text-success">Name</h5>
+          <h5 class="fw-bold text-success">
+            {{ salesForm().value.customerName }}
+          </h5>
         </div>
         <div class="fw-bold col-3">
-          <p>Oragadam</p>
+          @for (cust of selectedCustomer(); track cust) {
+          <p>{{ cust.customerPlace }}</p>
+          }
         </div>
       </div>
       <table class="table table-bordered">
@@ -100,7 +124,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td class="text-center"><i class="bi bi-trash"></i></td>
           </tr>
         </tbody>
       </table>

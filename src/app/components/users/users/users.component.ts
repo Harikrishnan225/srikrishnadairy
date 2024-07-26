@@ -19,6 +19,7 @@ export class UsersComponent {
   #router = inject(Router);
 
   addUser = signal(this.#fb.group({
+    userId:[''],
     userName: [''],
     userMobile: [''],
     userPassword: [''],

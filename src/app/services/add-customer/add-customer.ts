@@ -1,5 +1,4 @@
 export interface AddCustomer {
-id: any|string;
     customerId: number;
     customerName: string | null;
     customerMobile: number | null;

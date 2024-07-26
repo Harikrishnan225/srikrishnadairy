@@ -32,6 +32,13 @@ export class StorageService {
     }
   }
 
+  //getonecust
+  getOneCust(key: string, getOneId: any) {
+    const data = this.getData(key);
+    const custData = data.find((item: any) => item.customerId === getOneId);
+    return custData;
+  }
+
   //update
   updateData(key: string, updatedItem: any) {
     const data = this.getData(key);
@@ -43,8 +50,19 @@ export class StorageService {
   }
 
   //delete
-  removeData(key: string) {
-    localStorage.removeItem(key);
+  removeData(key: string, id: number) {
+    const data = localStorage.getItem(key);
+
+    if (data) {
+      let dataValue: any[] = JSON.parse(data);
+      if (Array.isArray(dataValue)) {
+        let removedData = dataValue.filter(item => item.id !== id);
+        localStorage.setItem(key, JSON.stringify(removedData));
+      } else {
+        console.error('Data is notfound');
+      }
+    }
   }
+
 
 }

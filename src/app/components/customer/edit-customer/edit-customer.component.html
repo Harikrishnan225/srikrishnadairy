@@ -4,10 +4,16 @@
         <div class="col-12 col-md-3 mt-2">
           <h3>Edit Customer</h3>
           <form [formGroup]="editCustomer()" (ngSubmit)="editCustomerSubmit()">
+            <!-- customerId -->
+            <div class="mb-3">
+              <label for="customerName" class="form-label">CustomerId</label>
+              <input type="text" class="form-control" id="customerName" formControlName="customerName" />
+            </div>
+
             <!-- customer name -->
             <div class="mb-3">
-              <label for="customerName" class="form-label">Customer Name</label>
-              <input type="text" class="form-control" id="customerName" formControlName="customerName" />
+              <label for="customerId" class="form-label">Customer Name</label>
+              <input type="text" class="form-control" id="customerId" formControlName="customerId" />
             </div>
   
             <!-- customer mobile -->

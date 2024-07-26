@@ -2,6 +2,8 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AddCustomer } from '../../../services/add-customer/add-customer';
 import { StorageService } from '../../../services/storage/storage.service';
+import { SalesData } from '../../../services/new-sales/new-sales';
+import { Router } from '@angular/router';
 
 enum TotalPrice {
   totalMilk,
@@ -28,6 +30,7 @@ export class NewSalesComponent implements OnInit {
   totalCurd = signal<TotalPrice>(0);
   perLiterCurdPrice = signal<TotalPrice>(0);
   totalMilkPrice = signal<any>(0)
+  #router = inject(Router);
 
   newSalesForm = signal(this.#fb.group({
     selectedCustomer: [''],
@@ -58,8 +61,8 @@ export class NewSalesComponent implements OnInit {
     //   })
 
     // })
-    
-    
+
+
   }
   milkProductPrice(totalMilk: number, perLiterMilkPrice: number) {
     return this.totalMilkPrice.update(() => totalMilk * perLiterMilkPrice)
@@ -72,6 +75,8 @@ export class NewSalesComponent implements OnInit {
   }
 
   newSalesFormSubmit() {
-    console.log(this.newSalesForm().value)
+    const salesValue = this.newSalesForm().value as SalesData
+    this.#storageService.saveData('sales', salesValue);
+    this.#router.navigate(['/sales']);
   }
 }

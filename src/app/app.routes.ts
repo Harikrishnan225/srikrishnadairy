@@ -19,7 +19,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/customer/add-customer/add-customer.component').then(c => c.AddCustomerComponent)
     },
     {
-        path: 'customers/edit',
+        path: 'customers/edit/:id',
         loadComponent: () => import('./components/customer/edit-customer/edit-customer.component').then(c => c.EditCustomerComponent)
     },
     {
@@ -31,7 +31,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/users/user-list/user-list.component').then(c => c.UserListComponent)
     },
     {
-        path: 'user/edit',
+        path: 'user/edit/:id',
         loadComponent: () => import('./components/users/edit-user/edit-user.component').then(c => c.EditUserComponent)
     },
     {
