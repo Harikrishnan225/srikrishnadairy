@@ -34,14 +34,14 @@ getData(key: string) {
 //getonecust
 getOneCust(key: string, getOneId: any) {
   const data = this.getData(key);
-  const userData = data.find((item: any) => item.userIdId === getOneId);
+  const userData = data.find((item: any) => item.userId === getOneId);
   return userData;
 }
 
 //update
 updateData(key: string, updatedItem: any) {
   const data = this.getData(key);
-  const index = data.findIndex((item: any) => item.userIdId === updatedItem.userIdId);
+  const index = data.findIndex((item: any) => item.userId === updatedItem.userId);
   if (index !== -1) {
     data[index] = updatedItem;
     localStorage.setItem(key, JSON.stringify(data));
