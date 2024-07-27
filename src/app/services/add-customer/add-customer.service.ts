@@ -7,27 +7,4 @@ import { AddCustomer } from './add-customer';
 })
 export class AddCustomerService {
 
-  private apiUrl = '';
-
-  #http = inject(HttpClient);
-
-  // getcustomer
-  getNewCustomerDetails() {
-
-  }
-
-  // createnewcustomer
-  createCustomerDetails(formData: AddCustomer) {
-    this.#http.post<AddCustomer>('', formData)
-  }
-
-  // updatecustomer
-  updateCustomerDetails() {
-
-  }
-
-  // deletecustomer
-  deleteCustomerDetails() {
-
-  }
 }

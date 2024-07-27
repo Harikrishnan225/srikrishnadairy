@@ -27,8 +27,6 @@ export class CustomersListComponent implements OnInit {
   }
 
   deleteCustomer(custId: number) {
-    console.log('delete',custId);
-    
     this.#storageService.removeData('customerData', custId)
   }
 }

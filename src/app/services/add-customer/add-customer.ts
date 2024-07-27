@@ -1,12 +1,12 @@
 export interface AddCustomer {
     customerId: number;
-    customerName: string | null;
-    customerMobile: number | null;
-    customerEmail: string | null;
-    milkPerLiter: number | null;
-    curdPerLiter: number | null;
-    customerDoorNo: number | null;
-    customerPlace: string | null;
-    customerDistrict: string | null;
-    customerPincode: number | null;
+    customerName: string;
+    customerMobile: number;
+    customerEmail: string;
+    milkPerLiter: number;
+    curdPerLiter: number;
+    customerDoorNo: number;
+    customerPlace: string;
+    customerDistrict: string;
+    customerPincode: number;
 }

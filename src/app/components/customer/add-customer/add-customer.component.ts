@@ -18,9 +18,7 @@ export class AddCustomerComponent {
   #fb = inject(FormBuilder);
   #storageService = inject(StorageService);
   #router = inject(Router);
-  // customerId = signal<number>(0);
-  // custId = computed(() => this.customerId() + 1);
-  //form data
+
   addNewCustomer = signal(this.#fb.group({
     customerId: [''],
     customerName: ['', Validators.required],
@@ -38,8 +36,6 @@ export class AddCustomerComponent {
   addNewCustomerSubmit() {
     const formValue = this.addNewCustomer().value as unknown as AddCustomer;
     if (formValue) {
-      // this.customerId.set(1);
-      // this.customerId.update((value) => value + 1);
       this.#router.navigate(['/customers']);
       this.#storageService.saveData('customerData', formValue);
       this.addNewCustomer().reset();

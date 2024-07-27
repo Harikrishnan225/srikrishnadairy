@@ -1,4 +1,21 @@
 import { Injectable } from '@angular/core';
+import { AddCustomer } from '../add-customer/add-customer';
+
+
+const IDGenerator = {
+  k: 'counter',
+  getCurrentId() {
+    return Number(localStorage.getItem(this.k)) || 0;
+  },
+  setCurrentId(x: number) {
+    localStorage.setItem(this.k, String(x));
+  },
+  getNewId() {
+    const newId = this.getCurrentId() + 1;
+    this.setCurrentId(newId);
+    return newId;
+  },
+}
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +24,14 @@ export class StorageService {
 
   constructor() { }
   //create
-  saveData(Data: string, value: any) {
-    const data = this.getData(Data);
+  saveData(key: string, value: AddCustomer) {
+    const data = this.getData(key);
+    value.customerId = IDGenerator.getNewId()
     if (data) {
       data.push(value);
-      localStorage.setItem(Data, JSON.stringify(data));
+      localStorage.setItem(key, JSON.stringify(data));
     } else {
-      localStorage.setItem(Data, JSON.stringify([value]));
+      localStorage.setItem(key, JSON.stringify([value]));
     }
 
   }
@@ -51,17 +69,7 @@ export class StorageService {
 
   //delete
   removeData(key: string, id: number) {
-    const data = localStorage.getItem(key);
-
-    if (data) {
-      let dataValue: any[] = JSON.parse(data);
-      if (Array.isArray(dataValue)) {
-        let removedData = dataValue.filter(item => item.id !== id);
-        localStorage.setItem(key, JSON.stringify(removedData));
-      } else {
-        console.error('Data is notfound');
-      }
-    }
+   
   }
 
 

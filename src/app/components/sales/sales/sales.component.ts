@@ -1,24 +1,27 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { StorageService } from '../../../services/storage/storage.service';
 import { AddCustomer } from '../../../services/add-customer/add-customer';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { SalesService } from '../../../services/sales/sales.service';
+import { SalesData } from '../../../services/new-sales/new-sales';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sales',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    CommonModule
   ],
   templateUrl: './sales.component.html',
-  styleUrl: './sales.component.scss'
+  styleUrl: './sales.component.scss',
 })
 export class SalesComponent implements OnInit {
 
-  #storageService = inject(StorageService);
+  #salesService = inject(SalesService);
   selectedCustomer = signal<AddCustomer[]>([]);
-  filteredSales: any[] = [];
+  salesData = signal<SalesData[]>([])
   salesTableData: boolean = false;
   #fb = inject(FormBuilder);
 
@@ -33,30 +36,32 @@ export class SalesComponent implements OnInit {
   }
 
   selectCustomer() {
-    const valCust = this.#storageService.getData('customerData');
-    this.selectedCustomer.set(valCust);
+    const salesValue = this.#salesService.getData('customerData');
+    this.selectedCustomer.set(salesValue);
   }
 
-  salesFormSubmit() {
-    const formValue = this.salesForm().value;
-    console.log(formValue);
-    
-    const salesData = this.#storageService.getData('sales');
-  //   if(salesData)
-  //     // this.filteredSales = salesData.filter((sale:any) => {
-  //     //   const saleDate = new Date(sale.date);
-  //     //   // const fromDate = new Date(formValue.fromDate);
-  //     //   // const toDate = new Date(formValue.toDate);
-        
-  //     //   return (
-  //     //     (formValue.customerName ? sale.customerName === formValue.customerName : true) &&
-  //     //     // (formValue.fromDate ? saleDate >= fromDate : true) &&
-  //     //     // (formValue.toDate ? saleDate <= toDate : true)
-  //     //   );
-  //   });
-  //   // console.log(typeof (valCust));
+  salesSearchForm() {
+    const salesData = this.#salesService.getData('sales');
+    const form = this.salesForm();
+    const custName = form?.get('customerName')?.value;
+    const fromDate = form?.get('fromDate')?.value;
+    const toDate = form?.get('toDate')?.value;
 
-  //   console.log(this.salesForm().value);
+    const fromDateObj = fromDate ? new Date(fromDate) : null;
+    const toDateObj = toDate ? new Date(toDate) : null;
 
+    const filteredSales = salesData.filter((item: SalesData) => {
+      if (item.selectedCustomer) {
+        const salesDate = new Date(item.salesDate);
+        return (
+          (item.selectedCustomer == custName) &&
+          (fromDateObj === null || salesDate >= fromDateObj) &&
+          (toDateObj === null || salesDate <= toDateObj)
+        );
+      }
+      return false;
+    });
+    this.salesData.set(filteredSales);
   }
+
 }

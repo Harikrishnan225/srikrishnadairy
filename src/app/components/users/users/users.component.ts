@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { StorageService } from '../../../services/storage/storage.service';
 import { Router } from '@angular/router';
 import { userData } from '../../../services/users/users';
+import { UsersService } from '../../../services/users/users.service';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,7 @@ import { userData } from '../../../services/users/users';
 })
 export class UsersComponent {
   #fb = inject(FormBuilder);
-  #storageService = inject(StorageService);
+  #userService = inject(UsersService);
   #router = inject(Router);
 
   addUser = signal(this.#fb.group({
@@ -28,7 +29,7 @@ export class UsersComponent {
 
   userSubmit() {
     const userValue = this.addUser().value as userData
-    this.#storageService.saveData('userData', userValue);
+    this.#userService.saveData('userData', userValue);
     this.#router.navigate(['/user']);
   }
 }

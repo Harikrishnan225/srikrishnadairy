@@ -1,21 +1,17 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AddCustomer } from '../../../services/add-customer/add-customer';
-import { StorageService } from '../../../services/storage/storage.service';
 import { SalesData } from '../../../services/new-sales/new-sales';
 import { Router } from '@angular/router';
+import { NewSalesService } from '../../../services/new-sales/new-sales.service';
+import { CommonModule } from '@angular/common';
 
-enum TotalPrice {
-  totalMilk,
-  perLiterMilkPrice,
-  totalCurd,
-  perLiterCurdPrice
-}
 @Component({
   selector: 'app-new-sales',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './new-sales.component.html',
   styleUrl: './new-sales.component.scss'
@@ -23,13 +19,8 @@ enum TotalPrice {
 export class NewSalesComponent implements OnInit {
 
   selectCustomer = signal<AddCustomer[]>([]);
-  #storageService = inject(StorageService);
+  #newSalesService = inject(NewSalesService);
   #fb = inject(FormBuilder);
-  totalMilk = signal<TotalPrice>(0);
-  perLiterMilkPrice = signal<TotalPrice>(0);
-  totalCurd = signal<TotalPrice>(0);
-  perLiterCurdPrice = signal<TotalPrice>(0);
-  totalMilkPrice = signal<any>(0)
   #router = inject(Router);
 
   newSalesForm = signal(this.#fb.group({
@@ -44,39 +35,27 @@ export class NewSalesComponent implements OnInit {
 
   ngOnInit(): void {
     this.customerDetails();
-
-
-    // this.newSalesForm().get('noOfLitersMilk')?.valueChanges.subscribe((totalMilk) => {
-    //   console.log(totalMilk);
-
-    //   this.newSalesForm().get('milkPricePerLiter')?.valueChanges.subscribe((perLiterMilkPrice) => {
-    //     console.log(perLiterMilkPrice);
-    //   })
-
-    //   this.newSalesForm().get('noOfLitersCurd')?.valueChanges.subscribe((totalCurd) => {
-    //     console.log(totalCurd);
-    //   })
-    //   this.newSalesForm().get('curdPricePerLiter')?.valueChanges.subscribe((perLiterCurdPrice) => {
-    //     console.log(perLiterCurdPrice);
-    //   })
-
-    // })
-
-
   }
-  milkProductPrice(totalMilk: number, perLiterMilkPrice: number) {
-    return this.totalMilkPrice.update(() => totalMilk * perLiterMilkPrice)
+
+  get milkPrice() {
+    const form = this.newSalesForm();
+    return Number(form?.get("noOfLitersMilk")?.value) * Number(form?.get("milkPricePerLiter")?.value)
+  }
+
+  get curdPrice() {
+    const form = this.newSalesForm();
+    return Number(form?.get("noOfLitersCurd")?.value) * Number(form?.get("curdPricePerLiter")?.value)
   }
 
   customerDetails() {
-    const valueCust = this.#storageService.getData('customerData');
+    const valueCust = this.#newSalesService.getData('customerData');
     console.log(valueCust)
     this.selectCustomer.set(valueCust);
   }
 
   newSalesFormSubmit() {
-    const salesValue = this.newSalesForm().value as SalesData
-    this.#storageService.saveData('sales', salesValue);
+    const salesValue = this.newSalesForm().value as unknown as SalesData
+    this.#newSalesService.saveData('sales', salesValue);
     this.#router.navigate(['/sales']);
   }
 }

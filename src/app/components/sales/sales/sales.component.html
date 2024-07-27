@@ -13,7 +13,7 @@
         </button>
       </div>
 
-      <form [formGroup]="salesForm()" (ngSubmit)="salesFormSubmit()">
+      <form [formGroup]="salesForm()" (ngSubmit)="salesSearchForm()">
         <!-- select customer dropdown -->
         <div>
           <label for="selectCust" class="mb-2">Select Customer</label>
@@ -22,7 +22,7 @@
             id="selectCust"
             formControlName="customerName"
           >
-            <option selected>Select Customer</option>
+            <option disabled>Select Customer</option>
             @for (cust of selectedCustomer(); track cust) {
             <option [value]="cust.customerName">{{ cust.customerName }}</option>
             }
@@ -70,13 +70,13 @@
   </div>
 
   <!-- search details table -->
-  @if (true) {
+  @if (salesData().length > 0) {
   <div class="row justify-content-center align-items-center mt-5">
     <div class="col-12 col-md-10">
       <div class="d-flex">
         <div class="col-4">
-          <div class="fw-bold">From:{{ salesForm().value.fromDate }}</div>
-          <div class="fw-bold">To:{{ salesForm().value.toDate }}</div>
+          <div class="fw-bold">From: {{ salesForm().value.fromDate | date: 'dd-MM-yyyy'}}</div>
+          <div class="fw-bold">To: {{ salesForm().value.toDate | date: 'dd-MM-yyyy'}}</div>
         </div>
         <div class="col-3">
           <h5 class="fw-bold text-success">
@@ -84,9 +84,7 @@
           </h5>
         </div>
         <div class="fw-bold col-3">
-          @for (cust of selectedCustomer(); track cust) {
-          <p>{{ cust.customerPlace }}</p>
-          }
+          <!-- <p>chennai</p> -->
         </div>
       </div>
       <table class="table table-bordered">
@@ -112,20 +110,22 @@
           </tr>
         </thead>
         <tbody>
+          @for (sales of salesData(); track sales) {
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ sales.salesDate }}</td>
+            <td>{{ sales.invoiceNumber }}</td>
+            <td>{{ sales.noOfLitersCurd || 0 }}</td>
+            <td>{{ sales.noOfLitersCurd / 40 || 0 }}</td>
+            <td>{{ sales.curdPricePerLiter || 0 | currency : "&#8377;" }}</td>
+            <td>{{ sales.noOfLitersCurd * sales.curdPricePerLiter || 0 | currency : "&#8377;" }}</td>
+            <td>{{ sales.noOfLitersMilk || 0 }}</td>
+            <td>{{ sales.noOfLitersMilk / 40 || 0 }}</td>
+            <td>{{ sales.milkPricePerLiter || 0 | currency : "&#8377;" }}</td>
+            <td>{{ sales.noOfLitersMilk * sales.milkPricePerLiter || 0 | currency : "&#8377;" }}</td>
+            <td>{{  sales.noOfLitersCurd * sales.curdPricePerLiter + sales.noOfLitersMilk * sales.milkPricePerLiter || 0 | currency : "&#8377;" }}</td>
             <td class="text-center"><i class="bi bi-trash"></i></td>
           </tr>
+          }
         </tbody>
       </table>
     </div>
